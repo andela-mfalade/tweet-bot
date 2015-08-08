@@ -1,0 +1,24 @@
+{
+  "name": "tweet-bot",
+  "version": "1.0.0",
+  "description": "This bot is gonna make my weekend.. Hopefully!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andela-mfalade/tweet-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andela-mfalade/tweet-bot/issues"
+  },
+  "homepage": "https://github.com/andela-mfalade/tweet-bot",
+  "dependencies": {
+    "express": "^4.13.3",
+    "nodemon": "^1.4.0",
+    "slack-client": "^1.4.1"
+  }
+}
