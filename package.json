@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "^4.13.3",
     "nodemon": "^1.4.0",
-    "slack-client": "^1.4.1"
+    "slack-client": "^1.4.1",
+    "twitter": "^1.2.5"
   }
 }
