@@ -18,6 +18,7 @@
   "homepage": "https://github.com/andela-mfalade/tweet-bot",
   "dependencies": {
     "express": "^4.13.3",
+    "lodash": "^3.10.1",
     "nodemon": "^1.4.0",
     "slack-client": "^1.4.1",
     "twitter": "^1.2.5"
