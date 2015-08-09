@@ -59,6 +59,18 @@ module.exports = function (slack) {
                 // console.log(secondMessagePart, 'second msg part');
             }
 
+            else if (userMessage.substring(0, 10) == 'tweets by ' || userMessage.substring(0, 3) == 'tb ') {
+              var queryString;
+              if (userMessage.substring(0, 3) == 'tb ') {
+                queryString = userMessage.substring(2, userMessage.length);
+              }
+              else queryString = userMessage.substring(9, userMessage.length);
+              tweetServer.getTweetsByUser(secondMessagePart, function (userTweetsArray) {
+                botResponse = responseFormatter.create_TWEETS_BY_response(queryString, userTweetsArray);
+                sendBotResponse();
+              });
+            }
+
             // Get a list of currently trending tweets
             else if (userMessage == 'trending') {
               tweetServer.getTrends(function (trends) {

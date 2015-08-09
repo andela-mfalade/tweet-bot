@@ -1,2 +1,2 @@
 # tweet-bot
-This bot is gonna make my weekend.. Hopefully!
+Something to keep myself busy over the weekend.

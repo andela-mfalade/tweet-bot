@@ -46,13 +46,25 @@ tweetServer.getTweetsFor = function (query ,cb) {
 
 // This is the method that looks up a particular username and returns the necessary information
 tweetServer.lookup = function (query, cb) {
-  client.get('users/show', {screen_name: query}, function(error, tweets, response){
+  client.get('users/show', {screen_name: query, count: 1}, function(error, tweets, response){
     if(error) console.log(error);
     else {
       cb(tweets);
-    }    
+    }
   });
 }
 
+tweetServer.getTweetsByUser = function(query, cb) {
+  client.get('statuses/user_timeline', {screen_name: query, count: 5}, function(error, tweets, response){
+    if(error) console.log(error);
+    else {
+      var userTweetsArray = [];
+      tweets.map(function(item) {
+        userTweetsArray.push(item.text);
+      });
+      cb(userTweetsArray);
+    }    
+  });
+}
 
 module.exports = tweetServer;

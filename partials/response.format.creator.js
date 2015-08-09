@@ -20,11 +20,9 @@ responseMsg.create_HELP_Response = function(username) {
     };
 };
 
-
 // Response for when a user sends the keyword "trending" to tweetbot
 responseMsg.create_TRENDING_Response = function(trends) {
     var attachmentsArray = [{ "title": "Trending topics in Nigeria.", "color": '#F62459' }];
-    var coolBarColors = ['#439FE0', '#7CD197', '#9B59B6', '#E67E22', '#34495E', '#DB0A5B', '#674172', '#F5D76E'];
     trends.map(function(trend) {
         attachmentsArray.push(
             {
@@ -37,7 +35,6 @@ responseMsg.create_TRENDING_Response = function(trends) {
     return { "attachments": attachmentsArray };
 };
 
-
 // Response for when a user sends a hashtagged word to tweetbot
 responseMsg.create_HASH_Response = function (userQuery, tweets) {
     var attachmentsArray = [{ "title": "Latest tweets for " + userQuery, "color": '#F62459' }];
@@ -47,7 +44,6 @@ responseMsg.create_HASH_Response = function (userQuery, tweets) {
         attachmentsArray = [{ "title": "No tweets were found for " + userQuery, "color": '#F62459' }];
     }
 
-    var coolBarColors = ['#439FE0', '#7CD197', '#9B59B6', '#E67E22', '#34495E', '#DB0A5B', '#674172', '#F5D76E'];
     tweets.map(function(tweetItem) {
         var imageUrl;
         if (!tweetItem.entities.media) imageUrl = '';
@@ -76,8 +72,18 @@ responseMsg.create_LOOKUP_response = function (username, userInfo) {
     return { "attachments": attachmentsArray };
 };
 
-responseMsg.create_TWEETS_BY_response = function () {
-
+responseMsg.create_TWEETS_BY_response = function (username, userTweetsArray) {
+    var attachmentsArray = [{ "title": "Latest tweets by "  + username, "color": '#F62459' }];
+    userTweetsArray.map(function(userTweet) {
+        attachmentsArray.push(
+            {
+                "fallback": userTweet,
+                "text": userTweet,
+                "color": coolBarColors[Math.floor(Math.random() * 8)]
+            }
+        )
+    });
+    return { "attachments": attachmentsArray };
 };
 
 // Export the method that creates the bot response
