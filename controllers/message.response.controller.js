@@ -45,7 +45,7 @@ module.exports = function (slack) {
             // Get a list of currently trending tweets
             else if (userMessage == 'trending') {
               tweetServer.getTrends(function (trends) {
-                botResponse = responseFormatter.create_TRENDING_Response(trends)
+                botResponse = responseFormatter.create_TRENDING_Response(trends);
                 sendBotResponse();
               });
             }
@@ -55,18 +55,10 @@ module.exports = function (slack) {
               botResponse = ":mayor:  <-- That's the guy.";
             }
 
-            // 
-
             // Get a particular hashtag
             else if (userMessage[0] == '#') {
-              var tweetList = '```\n Latest tweets on ' + userMessage + '. \n\n';
               tweetServer.getTweetsFor(userMessage, function( tweets ) {
-                var index = 1;
-                tweets.map(function (tweet) {
-                  tweetList += ' ' + index++ + ' - ' + tweet + ' \n';
-                });
-                tweetList += '\n ```';
-                botResponse = tweetList;
+                botResponse = responseFormatter.create_HASH_Response(userMessage, tweets);
                 sendBotResponse();
               });
             }

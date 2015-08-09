@@ -26,12 +26,18 @@ tweetServer.getTrends = function (cb) {
 
 // This method gets the tweets for the user input
 tweetServer.getTweetsFor = function (query ,cb) {
-  var queryObject = {q: query};
+  var splitQuery = query.split(' ');
+  var userQuery = splitQuery[0];
+  // Count is the default numbr of tweets that is returned to the user when they do not specify the number of tweets needed
+  var count = 3;
+  if (splitQuery.length > 1){
+    count = parseInt(splitQuery[1]), 10;
+  }
+  var queryObject = {q: userQuery, count: count};
   client.get('search/tweets', queryObject, function(error, tweetsObj, response) {
     if(error) console.log(error);
     else {
-      var tweetsArray = tweetsObj.statuses;
-      var tweets = _.pluck(tweetsArray, 'text');
+      var tweets = tweetsObj.statuses;
       cb(tweets);
     }
   });
