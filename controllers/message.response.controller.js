@@ -39,6 +39,13 @@ module.exports = function (slack) {
                 secondMessagePart = slack.getUserByID(slackUserId);
               }
             }
+
+            var userEnteredACorrectCommand = (userMessage == 'test' || userMessage == 'help' || firstMessagePart == 'lookup' || firstMessagePart == 'lu' || userMessage.substring(0, 10) == 'tweets by ' || userMessage.substring(0, 3) == 'tb ' || userMessage == 'trending' || userMessage == 'smm' || userMessage[0] == '#');
+            
+            if(!userEnteredACorrectCommand && userMessage.length >= 2) {
+              botResponse = responseFormatter.create_INVALID_ENTRY_response();
+              sendBotResponse();
+            } 
             
             if (userMessage == 'test') {
               botResponse = responseFormatter.create_TEST_Response(user.name);

@@ -8,10 +8,10 @@ responseMsg.create_HELP_Response = function(username) {
     return {
         "attachments": [
             {
-                "fallback": "Hi " + username + ". \n- Below is a list of commands for your convenience.\n\n `funnytweet`: To get a random funny tweet. \n",
+                "fallback": "Hi " + username + ". \n- Below is a list of Tweetbot commands.\n \n",
                 "pretext": "Hi " + username ,
-                "title": "Below is a list of commands for your convenience.",
-                "text": "`trending`: To show a list of the trending tweets. \n `#<hashtag> e.g #andelaFellowOfTheWeek`: to get the `3` latest tweet(s) on #andelaFellowOfTheWeek \n `#<hashtag> <number of results you want> e.g #tgif 4`: To view the 4 latest tweets on #tgif. Note that the `MAX` value is `10`.\n`lookup @<user> e.g lookup @andela`: To get the basic summary of @andela\n `tweets by @<user> or tb @andela e.g tweets by @andela or tb @andela`: To get the latest tweets by @andela \n`#?`: To show who built me.\n",
+                "title": "Below is a list of Tweetbot commands.",
+                "text": "`trending`: To show a list of the trending tweets. \n\n  `#<hashtag> e.g #andelaFellowOfTheWeek`: to get the `3` latest tweet(s) on #andelaFellowOfTheWeek \n\n  `#<hashtag> <number of results you want> e.g #tgif 4`: To view the 4 latest tweets on #tgif. Note that the `MAX` value is `10`.\n\n `lookup @<user> e.g lookup @andela`: To get the basic summary of @andela\n\n  `tweets by @<user> or tb @andela e.g tweets by @andela or tb @andela`: To get the latest tweets by @andela\n",
                 "mrkdwn": true,
                 "mrkdwn_in": ["text", "pretext"],
                 "color": "#7CD197"
@@ -37,11 +37,11 @@ responseMsg.create_TRENDING_Response = function(trends) {
 
 // Response for when a user sends a hashtagged word to tweetbot
 responseMsg.create_HASH_Response = function (userQuery, tweets) {
-    var attachmentsArray = [{ "title": "Latest tweets for " + userQuery, "color": '#F62459' }];
+    var attachmentsArray = [{ "title": "Latest tweets on " + userQuery, "color": '#F62459' }];
 
     // If no tweet exist for a particular hashtag
     if(tweets.length < 1) {
-        attachmentsArray = [{ "title": "No tweets were found for " + userQuery, "color": '#F62459' }];
+        attachmentsArray = [{ "title": "No tweets were found on " + userQuery, "color": '#F62459' }];
     }
 
     tweets.map(function(tweetItem) {
@@ -85,6 +85,18 @@ responseMsg.create_TWEETS_BY_response = function (username, userTweetsArray) {
     });
     return { "attachments": attachmentsArray };
 };
+
+responseMsg.create_INVALID_ENTRY_response = function () {
+    var attachmentsArray = [{ 
+        "title": "Oops, that command is not recognised! :stuck_out_tongue_winking_eye:", 
+        "text": "Send `help` to Tweetbot to get a list of available commands",
+        "color": coolBarColors[Math.floor(Math.random() * 8)],
+        "thumb_url": '',
+        "mrkdwn": true,
+        "mrkdwn_in": ["text", "pretext"]
+    }];
+    return { "attachments": attachmentsArray };
+}
 
 // Export the method that creates the bot response
 module.exports = responseMsg;
