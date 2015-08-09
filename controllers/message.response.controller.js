@@ -52,11 +52,11 @@ module.exports = function (slack) {
             }
 
             else if (firstMessagePart == 'lookup' || firstMessagePart == 'lu') {
-              // tweetServer.lookup(secondMessagePart, function (userInfo) {
-              //   botResponse = responseFormatter.create_LOOKUP_response(secondMessagePart, userInfo);
-              //   sendBotResponse();
-              // });
-                console.log(secondMessagePart, 'second msg part');
+              tweetServer.lookup(secondMessagePart, function (userInfo) {
+                botResponse = responseFormatter.create_LOOKUP_response(secondMessagePart, userInfo);
+                sendBotResponse();
+              });
+                // console.log(secondMessagePart, 'second msg part');
             }
 
             // Get a list of currently trending tweets
