@@ -32,6 +32,7 @@ tweetServer.getTweetsFor = function (query ,cb) {
   var count = 3;
   if (splitQuery.length > 1){
     count = parseInt(splitQuery[1]), 10;
+    if(count >10) count = 10;
   }
   var queryObject = {q: userQuery, count: count};
   client.get('search/tweets', queryObject, function(error, tweetsObj, response) {
@@ -42,6 +43,16 @@ tweetServer.getTweetsFor = function (query ,cb) {
     }
   });
 };
+
+// This is the method that looks up a particular username and returns the necessary information
+tweetServer.lookup = function (query, cb) {
+  client.get('users/show', {screen_name: query}, function(error, tweets, response){
+    if(error) console.log(error);
+    else {
+      cb(tweets);
+    }    
+  });
+}
 
 
 module.exports = tweetServer;

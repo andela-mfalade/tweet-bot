@@ -28,9 +28,18 @@ module.exports = function (slack) {
           else {
             var userMessage = message.text.toLowerCase();
             // var botResponse = "Send `help` as a dm to understand my purpose.";
-            var botResponse = {}
-
-
+            var botResponse = {};
+            var splitUserMessage = userMessage.split(' ');
+            var firstMessagePart = splitUserMessage[0];
+            var secondMessagePart;
+            if(splitUserMessage.length > 1) {
+              secondMessagePart = splitUserMessage[1];
+              if(secondMessagePart[0] == '<' && secondMessagePart[1] == '@') {
+                
+                secondMessagePart = slack.getUserByID(slackUserId);
+              }
+            }
+            
             if (userMessage == 'test') {
               botResponse = responseFormatter.create_TEST_Response(user.name);
               sendBotResponse();
@@ -40,6 +49,14 @@ module.exports = function (slack) {
             else if (userMessage == 'help') {
               botResponse = responseFormatter.create_HELP_Response(user.name);
               sendBotResponse();
+            }
+
+            else if (firstMessagePart == 'lookup' || firstMessagePart == 'lu') {
+              // tweetServer.lookup(secondMessagePart, function (userInfo) {
+              //   botResponse = responseFormatter.create_LOOKUP_response(secondMessagePart, userInfo);
+              //   sendBotResponse();
+              // });
+                console.log(secondMessagePart, 'second msg part');
             }
 
             // Get a list of currently trending tweets
